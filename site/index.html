@@ -23,103 +23,31 @@
           </div>
         </div>
         <div class="generatated-details">
-          <h3 class="text-center">Generatated Informations</h3>
-          <a href="/generate.html" class="btn btn-primary btn-generate">
-            Generate
+          <h3 class="text-left">My Projects</h3>
+          <a href="/generate.html" class="btn btn-info btn-generate">
+            Generate New
           </a>
-
-          <!-- <div class="container">
-            <div class="row g-2">
-              <div class="col-4">
-                <div class="p-3 border bg-light">Custom column padding</div>
+          <div class="card-container">
+            <!-- <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Title</h5>
+                <p class="card-text">Description</p>
+                <a href="/generate.html" class="btn btn-primary">Re-Generate</a>
+                <button
+                  type="button"
+                  data-toggle="tooltip"
+                  data-placement="bottom"
+                  title="Copy"
+                  class="btn btn-default btn-circle btn-xl">
+                  <img
+                    width="32"
+                    height="32"
+                    src="https://img.icons8.com/windows/32/create-new.png"
+                    alt="create-new" />
+                </button>
               </div>
-              <div class="col-4">
-                <div class="p-3 border bg-light">Custom column padding</div>
-              </div>
-              <div class="col-4">
-                <div class="p-3 border bg-light">Custom column padding</div>
-              </div>
-              <div class="col-4">
-                <div class="p-3 border bg-light">Custom column padding</div>
-              </div>
-            </div>
-          </div> -->
-
-          <div class="row">
-            <div class="col-sm-4">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Title</h5>
-                  <p class="card-text">Description</p>
-                  <a href="#" class="btn btn-primary">Re-Generate</a>
-                  <button
-                    type="button"
-                    data-toggle="tooltip"
-                    data-placement="bottom"
-                    title="Copy"
-                    class="btn btn-default btn-circle btn-xl">
-                    <img
-                      width="32"
-                      height="32"
-                      src="https://img.icons8.com/windows/32/create-new.png"
-                      alt="create-new" />
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Title</h5>
-                  <p class="card-text">Description</p>
-                  <a href="#" class="btn btn-primary">Re-Generate</a>
-                  <button
-                    type="button"
-                    data-toggle="tooltip"
-                    data-placement="bottom"
-                    title="Copy"
-                    class="btn btn-default btn-circle btn-xl">
-                    <img
-                      width="32"
-                      height="32"
-                      src="https://img.icons8.com/windows/32/create-new.png"
-                      alt="create-new" />
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Title</h5>
-                  <p class="card-text">Description</p>
-                  <a href="#" class="btn btn-primary">Re-Generate</a>
-                  <button
-                    type="button"
-                    data-toggle="tooltip"
-                    data-placement="bottom"
-                    title="Copy"
-                    class="btn btn-default btn-circle btn-xl">
-                    <img
-                      width="32"
-                      height="32"
-                      src="https://img.icons8.com/windows/32/create-new.png"
-                      alt="create-new" />
-                  </button>
-                </div>
-              </div>
-            </div>
+            </div> -->
           </div>
-          <!-- 
-          <table class="table">
-            <thead class="table-light">
-              <tr>
-                <th>Title</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody id="prompt_table"></tbody>
-          </table> -->
         </div>
       </div>
     </div>
@@ -143,20 +71,41 @@
             params: {},
           })
           .then((r) => {
-            let content = "";
-            const table = document.getElementById("prompt_table");
+            const CardContainer = document.querySelector(".card-container");
             console.log(r?.data);
             r?.data?.data?.map((i) => {
-              content = content + "<tr>";
-              content = content + "<td>";
-              content = content + i?.prompt_title;
-              content = content + "</td>";
-              content = content + "<td>";
-              content = content + i?.choices?.[0]?.message?.content;
-              content = content + "</td>";
-              content = content + "</tr>";
+              const cardElement = document.createElement("div");
+              cardElement.classList.add("card");
+              cardElement.innerHTML = ` <div class="card-body">
+                  <div style="display:flex; justify-content:space-between; align-items:center"> <h5 class="card-title">Title: ${
+                    i?.prompt_title.length > 30
+                      ? i?.prompt_title.slice(0, 30) + "..."
+                      : i?.prompt_title
+                  }</h5>   <button
+                  type="button"
+                  data-toggle="tooltip"
+                  data-placement="bottom"
+                  title="Copy"
+                  class="btn btn-default btn-circle btn-xl">
+                  <img
+                    width="32"
+                    height="32"
+                    src="https://img.icons8.com/windows/32/create-new.png"
+                    alt="create-new" />
+                </button></div>
+               
+                <p class="card-text">${
+                  i?.choices?.[0]?.message?.content.length > 200
+                    ? i?.choices?.[0]?.message?.content.slice(0, 200) + "..."
+                    : i?.choices?.[0]?.message?.content
+                }</p>
+               
+                <a href="/generate.html" class="btn btn-primary">Re-Generate</a>
+              
+              </div>
+`;
+              CardContainer.appendChild(cardElement);
             });
-            table.innerHTML = content;
           });
       })();
     </script>
