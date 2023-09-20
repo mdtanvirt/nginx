@@ -1,5 +1,5 @@
 const unprotected_routes = ["/login.html", "/signup.html"];
-const api_url = "http://159.223.71.247:5050";
+const api_url = "tearful-book.railway.internal";
 const checkLogin = (() => {
   const path = window.location.pathname;
   const user = localStorage.getItem("user");
