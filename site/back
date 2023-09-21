@@ -1,0 +1,5 @@
+i?.choices?.[0]?.message?.content.length > 200 ?
+i?.choices?.[0]?.message?.content.slice( 0, 200 ) + "..." :
+i?.choices?.[0]?.message?.content ${ i?.prompt_title.length > 30 ?
+i?.prompt_title.slice(0, 30) + "..." : i?.prompt_title } ${
+i?.choices?.[0]?.message?.content }

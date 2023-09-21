@@ -27,27 +27,7 @@
           <a href="/generate.html" class="btn btn-info btn-generate">
             Generate New
           </a>
-          <div class="card-container">
-            <!-- <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Title</h5>
-                <p class="card-text">Description</p>
-                <a href="/generate.html" class="btn btn-primary">Re-Generate</a>
-                <button
-                  type="button"
-                  data-toggle="tooltip"
-                  data-placement="bottom"
-                  title="Copy"
-                  class="btn btn-default btn-circle btn-xl">
-                  <img
-                    width="32"
-                    height="32"
-                    src="https://img.icons8.com/windows/32/create-new.png"
-                    alt="create-new" />
-                </button>
-              </div>
-            </div> -->
-          </div>
+          <div class="card-container"></div>
         </div>
       </div>
     </div>
@@ -99,10 +79,8 @@
                     ? i?.choices?.[0]?.message?.content.slice(0, 200) + "..."
                     : i?.choices?.[0]?.message?.content
                 }</p>
-               
                 <a href="/generate.html" class="btn btn-primary">Re-Generate</a>
-              
-              </div>
+                </div>
 `;
               CardContainer.appendChild(cardElement);
             });

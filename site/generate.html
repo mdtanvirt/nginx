@@ -45,7 +45,7 @@
           >
           <h2 class="text-center">Blog post Generator</h2>
           <div class="row">
-            <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-md-3">
               <div class="leftColl">
                 <!-- left side form start -->
                 <form onsubmit="event.preventDefault();">
@@ -64,9 +64,10 @@
                     </button>
                     <button
                       style="
-                        border: 1px solid #6c757d;
+                        border: 1px solid #c5d1dc;
                         padding: 3px 24px;
                         border-radius: 5px;
+                        background: #c5d1dc;
                       "
                     >
                       GPT-4
@@ -102,12 +103,20 @@
                   <div class="form-group select-input-wrap mb-3">
                     <select class="form-control select-input" id="toneDropdown">
                       <option value="">Select one</option>
-                      <option value="SEO Optimized (Confident1, ..)">
-                        SEO Optimized (Confident,..)
+                      <option value="Formal">Formal</option>
+                      <option value="Informative">Informative</option>
+                      <option value="Humorous or witty">
+                        Humorous or witty
                       </option>
-                      <option value="SEO Optimized (Confident2, ..)">
-                        SEO Optimized (Confident2, ..)
+                      <option value="Inspirational">Inspirational</option>
+                      <option value="Friendly">Friendly</option>
+                      <option value="Curious">Curious</option>
+                      <option value="Pessimistic and optimistic">
+                        Pessimistic and optimistic
                       </option>
+                      <option value="Motivating ">Motivating</option>
+                      <option value="Respectful">Respectful</option>
+                      <option value="Serious">Serious</option>
                     </select>
                   </div>
                   <h5>Language</h5>
@@ -132,11 +141,11 @@
                         id="wordCountFromDropDown"
                       >
                         <option value="">Select one</option>
-                        <option value="100">100</option>
-                        <option value="200">200</option>
-                        <option value="300">300</option>
-                        <option value="400">400</option>
-                        <option value="500">500</option>
+                        <option value="1000">1000</option>
+                        <option value="1500" selected>1500</option>
+                        <option value="2000">2000</option>
+                        <option value="2500">2500</option>
+                        <option value="3000">3000</option>
                       </select>
                     </div>
                     <div class="to">To</div>
@@ -146,11 +155,11 @@
                         id="wordCountToDropDown"
                       >
                         <option value="">Select one</option>
-                        <option value="200">200</option>
-                        <option value="500">500</option>
-                        <option value="1000">1000</option>
-                        <option value="1500">1500</option>
-                        <option value="2000">2000</option>
+                        <option value="2000" selected>2000</option>
+                        <option value="2500">2500</option>
+                        <option value="3000">3000</option>
+                        <option value="3500">3500</option>
+                        <option value="4000">4000</option>
                       </select>
                     </div>
                   </div>
@@ -162,7 +171,7 @@
                       id="generate_btn"
                       type="submit"
                       class="btn btn-primary"
-                      onclick="generate_prompt()"
+                      onclick="generate_prompt_keyWords()"
                     >
                       Gererate
                     </button>
@@ -172,7 +181,7 @@
               </div>
             </div>
             <!-- editor part start-->
-            <div class="col-sm-12 col-md-8">
+            <div class="col-sm-12 col-md-6">
               <div class="contentColl">
                 <div class="d-flex justify-content-end align-items-center">
                   <button class="btn btn-primary" onclick="quilContent(0)">
@@ -183,9 +192,15 @@
                   </button>
                 </div>
 
-                <div class="mt-2 mb-2">
-                  <b>Flesch grade score:</b>
-                  <span id="flesch" class="countNum">0</span>
+                <div style="display: flex; gap: 60px; align-items: center">
+                  <div class="mt-2 mb-2">
+                    <b>Flesch grade score:</b>
+                    <span id="flesch" class="countNum">0</span>
+                  </div>
+                  <div class="mt-2 mb-2">
+                    <b>Readability:</b>
+                    <span id="readabile" class="countNum">0</span>
+                  </div>
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center">
@@ -281,11 +296,66 @@
                     class="post-textarea w-100"
                     placeholder="Type here...."
                   ></div>
-                  <!-- editor code end-->
                 </form>
               </div>
             </div>
             <!-- editor part end-->
+
+            <div
+              class="col-sm-12 col-md-3"
+              style="background: white; border-radius: 5px"
+            >
+              <h2 style="font-size: 18px; font-weight: 600; margin-bottom: 0px">
+                Available Generated Article
+              </h2>
+
+              <div
+                class="new-card mt-3"
+                style="border-top: 1px solid rgb(195, 191, 191)"
+              ></div>
+              <!-- <div style="height: 800px">
+                <div class="card">
+                  <div class="card-body">
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                      ">
+                      <h5 class="card-title">Title:</h5>
+                      <div style="color: blue">
+                        Open
+                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                    <p class="card-text">
+                      With supporting text below as a natural lead-in to
+                      additional content.
+                    </p>
+                  </div>
+                </div>
+                <div class="card mt-3">
+                  <div class="card-body">
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                      ">
+                      <h5 class="card-title">Title:</h5>
+                      <div style="color: blue">
+                        Open
+                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                    <p class="card-text">
+                      With supporting text below as a natural lead-in to
+                      additional content.
+                    </p>
+                  </div>
+                </div>
+              </div> -->
+            </div>
           </div>
         </div>
       </div>
@@ -301,7 +371,9 @@
       aria-hidden="true"
     >
       <div class="modal-dialog" role="document">
-        <div class="modal-body text-center">...Loading PLease Wait</div>
+        <div class="modal-body text-center">
+          ...Generating your article please wait
+        </div>
       </div>
     </div>
 
@@ -359,6 +431,7 @@
         const words = document.getElementById("words");
         const Sentences = document.getElementById("sentence");
         const syllables = document.getElementById("syllable");
+        const readabileText = document.getElementById("readabile");
 
         let w = data.replaceAll("\n", " ").split(" ");
         w = w.filter((i) => i != " " && i != "");
@@ -381,12 +454,63 @@
         words.innerHTML = w.length;
         Sentences.innerHTML = s.length;
         syllables.innerHTML = syllable(data);
+
+        var range = flesch.innerHTML;
+
+        // Check the range using if-else statements
+        if (range >= 0 && range < 30) {
+          readabileText.innerHTML = "Very Difficult";
+          console.log(readabileText.innerHTML);
+        } else if (range >= 30 && range < 40) {
+          readabileText.innerHTML = "Difficult";
+          console.log("Difficult");
+        } else if (range >= 50 && range < 60) {
+          readabileText.innerHTML = "Fairly difficult";
+          console.log("Fairly difficult");
+        } else if (range >= 60 && range <= 70) {
+          readabileText.innerHTML = "Standard";
+          console.log("Standard");
+        } else if (range >= 70 && range <= 80) {
+          readabileText.innerHTML = "Fairly Easy";
+          console.log("Standard");
+        } else if (range >= 80 && range <= 90) {
+          readabileText.innerHTML = "Easy";
+          console.log("Standard");
+        } else {
+          readabileText.innerHTML = "Very Easy";
+          console.log("Out of range");
+        }
       }
     </script>
 
     <script>
       const module = {};
-      const generate_prompt = () => {
+      const contents = [];
+
+      const Content_map_function = () => {
+        contents?.map((content) => {
+          console.log("first", content);
+        });
+      };
+
+      const generate_prompt_keyWords = () => {
+        const keyWordsValue = document.getElementById("selectedkeyWords").value;
+        var arr = keyWordsValue?.split(",");
+        console.log(keyWordsValue);
+        arr?.map((e) => {
+          // console.log("first", e);
+          generate_prompt(e);
+        });
+        console.log(keyWordsValue);
+      };
+      const showContent = (index) => {
+        const data = contents[index];
+        quill.pasteHTML(
+          data.slice(data.indexOf("\n")).replaceAll("\n", "<br/>")
+        );
+        document.getElementById("textTitle").value = data.split("\n")[0];
+      };
+      const generate_prompt = (keyWordsValue) => {
         const prompt_title = document.getElementById("prompt_title").value;
         const loader = document.getElementById("loadingModal");
         const regenarate = document.getElementById("generate_btn");
@@ -395,27 +519,27 @@
         const wordFromValue = document.getElementById(
           "wordCountFromDropDown"
         ).value;
-        const wordToValue = document.getElementById(
-          "wordCountToDropDown"
-        ).value;
-        const toneValue = document.getElementById("toneDropdown").value;
-        const keyWordsValue = document.getElementById("selectedkeyWords").value;
 
-        console.log(
-          "write a blog about " +
-            prompt_title +
-            "," +
-            keyWordsValue +
-            " in " +
-            toneValue +
-            " tone in " +
-            selectedLanguageValue +
-            " within " +
-            wordFromValue +
-            " to " +
-            wordToValue +
-            " words "
-        );
+        // const wordToValue = document.getElementById(
+        //   "wordCountToDropDown"
+        // ).value;
+        const toneValue = document.getElementById("toneDropdown").value;
+        // const keyWordsValue = document.getElementById("selectedkeyWords").value;
+
+        // console.log(
+        //   "write a blog about " +
+        //     prompt_title +
+        //     "," +
+        //     keyWordsValue +
+        //     " in " +
+        //     toneValue +
+        //     " tone in " +
+        //     selectedLanguageValue +
+        //     " more " +
+        //     "than " +
+        //     wordFromValue +
+        //     " words "
+        // );
 
         if (prompt_title) {
           // turn on loader modal
@@ -428,15 +552,14 @@
                 prompt_title +
                 "," +
                 keyWordsValue +
-                "in " +
+                " in " +
                 toneValue +
-                "tone in " +
+                " tone in " +
                 selectedLanguageValue +
-                "within" +
+                " more " +
+                "than " +
                 wordFromValue +
-                "to " +
-                wordToValue +
-                "words ",
+                " words ",
             })
             .then((r) => {
               // turn off loader modal
@@ -445,17 +568,60 @@
               const data = r?.data?.choices?.[0]?.message?.content;
 
               if (data) {
+                contents.push(data);
+                const CardContainer = document.querySelector(".new-card");
+                console.log("contents", contents);
+                CardContainer.innerHTML = "";
+                contents.map((i, index) => {
+                  const cardElement = document.createElement("div");
+                  cardElement.classList.add("card");
+                  cardElement.innerHTML =
+                    ` <div class="card" style="margin-top:10px">
+                  <div class="card-body">
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                      ">
+                      <h5 class="card-title">
+                        ${
+                          i.split("\n")[0].length > 33
+                            ? i.split("\n")[0].slice(0, 33) + "..."
+                            : i.split("\n")[0]
+                        }</h5>
+                      <div style="color: blue; cursor:pointer" onclick="showContent(` +
+                    index +
+                    `)">
+                        Open
+                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                    <p class="card-text">
+                     
+                     ${
+                       i.slice(data.indexOf("\n")).replaceAll("\n", "<br/>")
+                         .length > 150
+                         ? i
+                             .slice(data.indexOf("\n"))
+                             .replaceAll("\n", "<br/>")
+                             .slice(0, 150) + "..."
+                         : i.slice(data.indexOf("\n")).replaceAll("\n", "<br/>")
+                     }
+                    </p>
+                  </div>
+                </div>
+                `;
+                  CardContainer.appendChild(cardElement);
+                });
+                // Content_map_function();
                 try {
                   module.getScore(data);
                 } catch (e) {
                   console.log(e);
                 }
                 // document.getElementById("prompt_message").value = data;
-                quill.pasteHTML(
-                  data.slice(data.indexOf("\n")).replaceAll("\n", "<br/>")
-                );
-                document.getElementById("textTitle").value =
-                  data.split("\n")[0];
+                showContent(0);
               }
 
               console.log(r);
