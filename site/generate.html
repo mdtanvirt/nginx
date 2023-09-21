@@ -175,8 +175,10 @@
             <div class="col-sm-12 col-md-8">
               <div class="contentColl">
                 <div class="d-flex justify-content-end align-items-center">
-                  <button class="btn btn-primary">Save Draft</button>
-                  <button class="btn btn-primary" onclick="quilContent()">
+                  <button class="btn btn-primary" onclick="quilContent(0)">
+                    Save Draft
+                  </button>
+                  <button class="btn btn-primary" onclick="quilContent(1)">
                     Save and publish
                   </button>
                 </div>
@@ -336,10 +338,11 @@
         theme: "snow",
       });
 
-      const quilContent = () => {
+      const quilContent = (status) => {
         axios.post(api_url + "/api/publish", {
           title: "",
           content: quill.container.innerHTML,
+          published: status,
         });
         console.log("first", quill.container.innerHTML);
       };
