@@ -126,7 +126,9 @@
                       id="languageDropDown"
                     >
                       <option value="">Select one</option>
-                      <option value="English" id="english">English</option>
+                      <option value="English" id="english" selected>
+                        English
+                      </option>
                       <!-- <option value="Bangali" id="bangla">Bangali</option> -->
                       <!-- <option value="Hindi" id="hindi">Hindi</option> -->
                     </select>
@@ -425,7 +427,8 @@
       import { fleschKincaid } from "https://esm.sh/flesch-kincaid@2?bundle";
       import { syllable } from "https://esm.sh/syllable@5?bundle";
       module.getScore = getScore;
-      function getScore(data) {
+      function getScore(index) {
+        const data = contents[index];
         const flesch = document.getElementById("flesch");
         const characters = document.getElementById("characters");
         const words = document.getElementById("words");
@@ -509,6 +512,11 @@
           data.slice(data.indexOf("\n")).replaceAll("\n", "<br/>")
         );
         document.getElementById("textTitle").value = data.split("\n")[0];
+        try {
+          module.getScore(index);
+        } catch (e) {
+          console.log(e);
+        }
       };
       const generate_prompt = (keyWordsValue) => {
         const prompt_title = document.getElementById("prompt_title").value;
@@ -615,11 +623,7 @@
                   CardContainer.appendChild(cardElement);
                 });
                 // Content_map_function();
-                try {
-                  module.getScore(data);
-                } catch (e) {
-                  console.log(e);
-                }
+
                 // document.getElementById("prompt_message").value = data;
                 showContent(0);
               }
