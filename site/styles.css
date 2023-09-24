@@ -192,7 +192,7 @@ b {
 
 .main_outer_wrap {
   padding: 20px 0;
-  max-width: 1800px !important;
+  max-width: 1400px !important;
   /* margin: auto; */
   margin: 0 auto;
 }
@@ -202,7 +202,7 @@ b {
 }
 .blog-generator {
   position: relative;
-  max-width: 1800px !important;
+  max-width: 1400px !important;
   margin: 0 auto;
 }
 .blog-generator .row {
